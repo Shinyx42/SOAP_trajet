@@ -27,7 +27,11 @@ wsgi_application = WsgiApplication(application)
 
 if __name__=="__main__":
     from wsgiref.simple_server import make_server
-    serveur = make_server('127.0.0.1', 8000, wsgi_application)
+    import os
+    port = int(os.environ.get('PORT', 8000))
+    host = '0.0.0.0'
+    serveur = make_server(host, port, wsgi_application)
+    print(f"Listening on {host}:{port}")
     serveur.serve_forever()
     
 #geo.api.gouv.fr
